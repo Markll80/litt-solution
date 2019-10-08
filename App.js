@@ -5,6 +5,8 @@ import SearchField from './components/search-field/search-field.component';
 import Map from './components/map/map.component';
 import axios from 'axios';
 
+
+// Application core, serves as data transport between the map and user input.
 class App extends React.Component {
   constructor() {
     super();
@@ -18,6 +20,7 @@ class App extends React.Component {
     }
   }
 
+  // After components mount, get user current location
   componentDidMount() {
     const geoOptions = {
       enableHightAccuracy: true,
@@ -27,6 +30,7 @@ class App extends React.Component {
     navigator.geolocation.getCurrentPosition(this.onGeoSuccess, this.onGeoFailure, geoOptions);
   }
 
+  // Helper method to geolocation function above
   onGeoSuccess = pos => this.setState({
     startingCoords: {
       latitude: pos.coords.latitude,
@@ -36,8 +40,10 @@ class App extends React.Component {
     renderMap: true
   });
 
+  // Helper method to geolocation function above
   onGeoFailure = err => alert(err.message);
 
+  // Main function to fetch data from Yelp API
   getData = query => {
     const url = 'https://api.yelp.com/v3/businesses/search';
     const config = {
@@ -52,6 +58,7 @@ class App extends React.Component {
       }
     }
 
+    // HTTP GET request
     axios.get(url, config)
     .then(response => this.setState({
       startingCoords: this.state.startingCoords,
@@ -61,8 +68,11 @@ class App extends React.Component {
     .catch(err => console.log(err));
   };
   
+  // Render
   render() {
     return (
+      // Dismiss keyboard when click on anywhere else on screen
+      // Conditional rendering is there to make sure map renders after the app has the user's location data, otherwise initial value null will be passed in
       <TouchableWithoutFeedback onPress={()=>Keyboard.dismiss()}>
         <View style={styles.container}>
           <SearchField getData={this.getData} />
