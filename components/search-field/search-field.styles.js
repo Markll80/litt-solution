@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         width: '95%',
         height: '8%',
-        marginTop: 35
+        marginTop: 35,
     },
     textinput: {
         flex: 1,
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 5,
         borderColor: '#C6C2C1'
-    }
+    },
 });
 
 export default styles;

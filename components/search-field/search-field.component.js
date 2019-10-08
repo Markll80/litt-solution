@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TextInput } from 'react-native';
+import { View, TextInput} from 'react-native';
 
 import styles from './search-field.styles';
 
@@ -17,7 +17,7 @@ class SearchField extends React.Component {
   };
 
   handleSubmit = () => {
-    this.props.getCoordsList(this.state.query);
+    this.props.getData(this.state.query);
     this.setState({ query: '' });
   };
 
